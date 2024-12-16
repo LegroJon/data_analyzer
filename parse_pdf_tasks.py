@@ -28,6 +28,17 @@ def extract_text_from_pdf(pdf_path):
             text += page.extract_text()
     return text
 
+# Remove duplicate entries
+def remove_duplicates(data):
+    unique_data = []
+    seen = set()
+    for row in data:
+        row_tuple = tuple(row)  # Convert list to tuple for set comparison
+        if row_tuple not in seen:
+            seen.add(row_tuple)
+            unique_data.append(row)
+    return unique_data
+
 # Patterns for SCT, SIT, and SD
 patterns = [
     r'(?:(?P<step>\d+)\.\s)?(?P<task>\S+)\s(?P<title>.+?)\s(?P<proponent>\d{2,3}\s-\s.+?)\s(?P<status>Approved)',
@@ -69,12 +80,15 @@ if __name__ == "__main__":
     # Parse the tasks
     parsed_tasks = parse_tasks(text, patterns)
 
+    # Remove duplicates
+    unique_tasks = remove_duplicates(parsed_tasks)
+
     # Generate unique output file name
     output_file = f"tasks_output_{int(time.time())}.csv"
 
     # Write parsed data to CSV file (without headers)
     with open(output_file, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerows(parsed_tasks)
+        writer.writerows(unique_tasks)
 
     print(f"Data has been successfully saved to {output_file}")
