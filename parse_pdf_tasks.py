@@ -10,13 +10,24 @@ def parse_tasks(text, patterns):
     for pattern in patterns:
         matches = re.finditer(pattern, text)
         for match in matches:
-            parsed_data.append([
-                match.group('step') if match.group('step') else '',  # Handle missing Step Numbers
-                match.group('task'),
-                match.group('title'),
-                match.group('proponent'),
-                match.group('status')
-            ])
+            # Handle Drill Type column for Supporting Drills
+            if "Battle Drill" in match.group('title'):
+                parsed_data.append([
+                    match.group('step') if match.group('step') else '',
+                    match.group('task'),
+                    match.group('title'),
+                    "Battle Drill",  # Extra column for Drill Type
+                    match.group('proponent'),
+                    match.group('status')
+                ])
+            else:
+                parsed_data.append([
+                    match.group('step') if match.group('step') else '',
+                    match.group('task'),
+                    match.group('title'),
+                    match.group('proponent'),
+                    match.group('status')
+                ])
     return parsed_data
 
 # Function to extract text from PDF
@@ -41,7 +52,9 @@ def remove_duplicates(data):
 
 # Patterns for SCT, SIT, and SD
 patterns = [
+    # Supporting Collective Tasks and Individual Tasks
     r'(?:(?P<step>\d+)\.\s)?(?P<task>\S+)\s(?P<title>.+?)\s(?P<proponent>\d{2,3}\s-\s.+?)\s(?P<status>Approved)',
+    # Supporting Drills (Handles Drill Type "Battle Drill")
     r'(?:(?P<step>\d+)-PLT-)?(?P<task>\S+)\s(?P<title>.+?)\sBattle Drill\s(?P<proponent>\d{2,3}\s-\s.+?)\s(?P<status>Approved)'
 ]
 
@@ -86,9 +99,12 @@ if __name__ == "__main__":
     # Generate unique output file name
     output_file = f"tasks_output_{int(time.time())}.csv"
 
-    # Write parsed data to CSV file (without headers)
+    # Write parsed data to CSV file
     with open(output_file, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerows(unique_tasks)
+
+        # Write rows with varying columns
+        for row in unique_tasks:
+            writer.writerow(row)
 
     print(f"Data has been successfully saved to {output_file}")
