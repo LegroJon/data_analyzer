@@ -59,8 +59,8 @@ if __name__ == "__main__":
     # Remove duplicates
     unique_tasks = remove_duplicates(parsed_tasks)
 
-    # Generate unique output file name
-    output_file = f"tasks_output_{int(time.time())}.csv"
+    # Generate output file name based on the input file name
+    output_file = os.path.splitext(input_file)[0] + "_output.csv"
 
     # Write parsed data to CSV file (without headers)
     with open(output_file, 'w', newline='') as csvfile:
