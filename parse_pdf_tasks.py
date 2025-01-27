@@ -1,6 +1,5 @@
 import csv
 import re
-import PyPDF2
 import os
 import time
 
@@ -18,15 +17,6 @@ def parse_tasks(text, patterns):
                 match.group('status')
             ])
     return parsed_data
-
-# Function to extract text from PDF
-def extract_text_from_pdf(pdf_path):
-    text = ""
-    with open(pdf_path, 'rb') as file:
-        reader = PyPDF2.PdfReader(file)
-        for page in reader.pages:
-            text += page.extract_text()
-    return text
 
 # Remove duplicate entries
 def remove_duplicates(data):
@@ -47,35 +37,21 @@ patterns = [
 
 # Function to get file input from the user
 def get_file_input():
-    print("Choose the file type to parse:")
-    print("1. Text File (.txt)")
-    print("2. PDF File (.pdf)")
-    choice = input("Enter 1 or 2: ").strip()
-
-    if choice == "1":
-        file_path = input("Enter the path to the text file (.txt): ").strip()
-    elif choice == "2":
-        file_path = input("Enter the path to the PDF file (.pdf): ").strip()
-    else:
-        print("Invalid choice. Exiting.")
-        exit()
+    file_path = input("Enter the path to the text file (.txt): ").strip()
 
     if not os.path.isfile(file_path):
         print("Error: File not found. Please provide a valid file path.")
         exit()
 
-    return choice, file_path
+    return file_path
 
 # Main Program Execution
 if __name__ == "__main__":
-    choice, input_file = get_file_input()
+    input_file = get_file_input()
 
-    # Extract text based on file type
-    if choice == "1":  # Text file
-        with open(input_file, 'r') as file:
-            text = file.read()
-    elif choice == "2":  # PDF file
-        text = extract_text_from_pdf(input_file)
+    # Extract text from the text file
+    with open(input_file, 'r') as file:
+        text = file.read()
 
     # Parse the tasks
     parsed_tasks = parse_tasks(text, patterns)
