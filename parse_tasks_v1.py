@@ -1,3 +1,11 @@
+"""
+Author: Jonathan
+Date: 2023-10-05
+Program: parse_tasks_v1.py
+Summary: This program parses tasks from a text file using specified regex patterns,
+         removes duplicate entries, and saves the parsed data to a CSV file.
+"""
+
 import csv
 import re
 import os
@@ -15,7 +23,17 @@ PATTERNS = {
 }
 
 def parse_original_tasks(text, patterns):
-    """Parses text using regex for the 'original' format."""
+    # """
+    # Parses text using regex for the 'original' format.
+
+    # Args:
+    #     text (str): The text to be parsed.
+    #     patterns (list): A list of regex patterns to use for parsing.
+
+    # Returns:
+    #     list: A list of parsed data, where each item is a list containing
+    #           step, task, title, proponent, and status.
+    # """
     parsed_data = []
     for pattern in patterns:
         for match in re.finditer(pattern, text):
@@ -29,6 +47,15 @@ def parse_original_tasks(text, patterns):
     return parsed_data
 
 def parse_drill_tasks(text, patterns):
+    # """Parses text using regex for the 'drill' format.
+
+    # Args:
+    #     text (str): The text to be parsed.
+    #     patterns (list): A list of regex patterns to use for parsing.
+
+    # Returns:
+    #     list: A list of parsed data.
+    # """
     parsed_data = []
     for pattern in patterns:
         for match in re.finditer(pattern, text, re.MULTILINE):
@@ -41,7 +68,7 @@ def parse_drill_tasks(text, patterns):
 
 
 def remove_duplicates(data):
-    """Removes exact duplicate rows from a list of lists."""
+    # """Removes exact duplicate rows from a list of lists."""
     unique_data = []
     seen = set()
     for row in data:
