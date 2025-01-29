@@ -9,7 +9,7 @@ PATTERNS = {
         r'(?:(?P<step>\d+)-PLT-)?(?P<task>\S+)\s(?P<title>.+?)\sBattle Drill\s(?P<proponent>\d{2,3}\s-\s.+?)\s(?P<status>Approved)'
     ],
     'drill': [
-        r'^\s*(?:\d+\.\s+)?(?P<step>[\w-]+)\s+(?P<status>\S+)\s+(?P<verb>\S+)\s+(?P<title>.*)'
+        r'^\s*(?:\d+\.\s+)?(?P<step>[\w-]+)\s+(?P<status>\S+)\s+(?P<title>.*)'
     ]
 
 }
@@ -35,7 +35,6 @@ def parse_drill_tasks(text, patterns):
             parsed_data.append([
                 match.group('step') or '',
                 match.group('status') or '',
-                match.group('verb') or '',
                 match.group('title') or ''
             ])
     return parsed_data
