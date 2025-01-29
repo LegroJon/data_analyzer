@@ -68,7 +68,15 @@ def parse_drill_tasks(text, patterns):
 
 
 def remove_duplicates(data):
-    # """Removes exact duplicate rows from a list of lists."""
+    # """
+    # Removes exact duplicate rows from a list of lists.
+
+    # Args:
+    #     data (list): A list of lists where each inner list represents a row of data.
+
+    # Returns:
+    #     list: A list of lists with duplicate rows removed.
+    # """
     unique_data = []
     seen = set()
     for row in data:
