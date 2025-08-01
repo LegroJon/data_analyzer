@@ -19,7 +19,7 @@ if errorlevel 1 (
 REM Run the demo
 echo Running demonstration...
 echo.
-python demo.py
+python scripts\demo.py
 
 echo.
 echo ====================================

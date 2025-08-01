@@ -15,21 +15,28 @@ A professional-grade Python project for extracting, processing, and analyzing mi
 
 ```
 data_analyzer/
-├── src/                    # Source code
+├── src/                    # 📁 Source code
 │   ├── __init__.py        # Package initialization
 │   ├── task_parser.py     # Main parser module
 │   └── config.py          # Configuration settings
-├── data/                  # Data directories
+├── scripts/               # 🚀 Execution scripts & batch files
+│   ├── demo.py           # Automated demonstration
+│   ├── run_tests.py      # Test suite runner
+│   └── *.bat             # Windows launcher scripts
+├── data/                  # 📊 Data directories
 │   ├── input/             # Input text files
-│   └── output/            # Generated CSV files
-├── tests/                 # Test suite
+│   ├── output/            # Generated CSV files
+│   │   ├── demo/          # Demo outputs
+│   │   └── legacy/        # Historical files
+│   └── samples/           # Sample data files
+├── tests/                 # 🧪 Test suite
 │   └── test_task_parser.py
-├── docs/                  # Documentation
-├── config/                # Configuration files
+├── docs/                  # 📚 Documentation
+├── config/                # ⚙️ Configuration files
+├── .vscode/              # IDE settings
 ├── requirements.txt       # Python dependencies
 ├── setup.py              # Package setup
-├── README.md             # This file
-└── LICENSE               # License information
+└── README.md             # This file
 ```
 
 ## Installation (Optional)

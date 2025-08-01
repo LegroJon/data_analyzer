@@ -19,7 +19,7 @@ if errorlevel 1 (
 REM Run the test suite
 echo Running comprehensive test suite...
 echo.
-python run_tests.py
+python scripts\run_tests.py
 
 echo.
 echo ====================================

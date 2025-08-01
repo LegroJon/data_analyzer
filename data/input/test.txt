@@ -1,2 +1,0 @@
-"Test input file"  
-"1. 07-CO-3036 Test Task 07 - Infantry (Collective) Approved" 
