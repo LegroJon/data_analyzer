@@ -1,0 +1,18 @@
+{
+    "include": [
+        "src",
+        "tests"
+    ],
+    "exclude": [
+        "**/__pycache__",
+        "**/*.pyc"
+    ],
+    "extraPaths": [
+        "./src"
+    ],
+    "pythonVersion": "3.8",
+    "pythonPlatform": "Windows",
+    "typeCheckingMode": "basic",
+    "reportMissingImports": "warning",
+    "reportMissingTypeStubs": "none"
+}

@@ -1,0 +1,12 @@
+{
+    "python.analysis.extraPaths": ["./src"],
+    "python.defaultInterpreterPath": "python",
+    "python.terminal.activateEnvironment": true,
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.include": ["src/**"],
+    "python.analysis.exclude": ["**/__pycache__", "**/node_modules"],
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/*.pyc": true
+    }
+}
